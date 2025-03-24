@@ -1,5 +1,29 @@
 @import 'tailwindcss';
 
+:root {
+  --primary-color: #FF5A5F;
+  --secondary-color: #6C63FF;
+  --accent-color: #FFC107;
+  --error-color: #FF4757;
+  --success-color: #2ED573;
+  --dark-bg: #1A1A2E;
+  --light-bg: #F5F5F7;
+}
+
+/* Global styles */
+body {
+  overflow-x: hidden;
+  background-color: #121212;
+  color: white;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--light-bg);
+    color: #333;
+  }
+}
+
 /* Add these custom styles */
 .sketch-border {
   position: relative;
@@ -12,7 +36,7 @@
   left: -3px;
   right: -3px;
   bottom: -3px;
-  border: 2px solid rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   z-index: -1;
   transform: rotate(-0.5deg);
@@ -22,6 +46,7 @@
   transform: rotate(-1deg);
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sketch-button:active {
@@ -43,4 +68,107 @@
   height: 1px;
   background: rgba(255, 255, 255, 0.5);
   transform: rotate(-1deg);
+}
+
+/* App Banner */
+.app-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  z-index: 50;
+  transition: all 0.3s ease;
+  transform: translateY(-100%);
+  text-align: center;
+  font-weight: 500;
+}
+
+.app-banner.visible {
+  transform: translateY(0);
+}
+
+.error-banner {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.success-banner {
+  background-color: var(--success-color);
+  color: white;
+}
+
+/* Last recording thumbnail */
+.last-recording {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 3px solid var(--primary-color);
+  transform: rotate(2deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3), 0 0 15px rgba(255,90,95,0.5);
+  transition: all 0.2s ease;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 40;
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3), 0 0 5px rgba(255,90,95,0.5);
+  }
+  50% {
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3), 0 0 20px rgba(255,90,95,0.8);
+  }
+  100% {
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3), 0 0 5px rgba(255,90,95,0.5);
+  }
+}
+
+.last-recording:hover, .last-recording:active {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .control-buttons button {
+    margin: 0 0.25rem;
+    padding: 0.5rem;
+  }
+  
+  .last-recording {
+    width: 60px;
+    height: 60px;
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Selfie mode indicator */
+.selfie-mode-indicator {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--accent-color);
+  color: black;
+  font-weight: bold;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  opacity: 0.9;
+  transform: rotate(-2deg);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Title styling enhancement */
+.app-title {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
 }
