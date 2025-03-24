@@ -6,7 +6,7 @@ import {
   FaPause,
   FaVolumeUp,
   FaVolumeMute,
-  FaCamera
+  FaCamera,
 } from "react-icons/fa";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 
@@ -56,7 +56,7 @@ const VideoControls = ({
       setIsVisible(true);
       return;
     }
-    
+
     // For larger screens, hide after timeout
     const handleMouseMove = () => {
       setIsVisible(true);
@@ -117,7 +117,7 @@ const VideoControls = ({
       </div>
 
       {/* Record button (always visible) */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30">
         {isSelfieMode ? (
           <button
             onClick={onSelfieCapture}
@@ -127,7 +127,8 @@ const VideoControls = ({
                      border-2 border-[#6C63FF] dark:border-[#6C63FF]"
             style={{
               transform: "rotate(-2deg)",
-              boxShadow: "3px 3px 0 rgba(0,0,0,0.2), 0 0 15px rgba(108, 99, 255, 0.5)",
+              boxShadow:
+                "3px 3px 0 rgba(0,0,0,0.2), 0 0 15px rgba(108, 99, 255, 0.5)",
             }}
             aria-label="Take Selfie"
           >
@@ -148,7 +149,8 @@ const VideoControls = ({
                      ${isRecording ? "animate-pulse" : ""}`}
             style={{
               transform: "rotate(-2deg)",
-              boxShadow: "3px 3px 0 rgba(0,0,0,0.2), 0 0 15px rgba(255, 90, 95, 0.5)",
+              boxShadow:
+                "3px 3px 0 rgba(0,0,0,0.2), 0 0 15px rgba(255, 90, 95, 0.5)",
             }}
             aria-label={isRecording ? "Stop Recording" : "Start Recording"}
           >
@@ -161,10 +163,10 @@ const VideoControls = ({
           </button>
         )}
       </div>
-      
+
       {/* Recording timer - Positioned directly above the record button when recording */}
       {isRecording && (
-        <div className="absolute bottom-[150px] left-1/2 transform -translate-x-1/2 z-40">
+        <div className="absolute bottom-[120px] left-1/2 transform -translate-x-1/2 z-40">
           <div className="bg-red-600 text-white text-xl font-mono px-4 py-1 rounded-full animate-pulse shadow-lg">
             <span className="flex items-center whitespace-nowrap">
               REC <span className="mx-2">•</span> {formatTime(currentTime)}
@@ -180,7 +182,7 @@ const VideoControls = ({
         style={{
           borderTop: "none",
           paddingBottom: "5rem", // More room for record button
-          height: "40%", // Ensure overlay covers enough area
+          height: "23.5%", // Ensure overlay covers enough area
         }}
       >
         {/* Control buttons - Make them more visible */}
@@ -201,24 +203,24 @@ const VideoControls = ({
               className="text-white bg-[#6C63FF] p-3 rounded-full hover:bg-opacity-90 transition-colors sketch-button"
               aria-label={isMuted ? "Unmute" : "Mute"}
             >
-              {isMuted ? (
-                <FaVolumeMute size={18} />
-              ) : (
-                <FaVolumeUp size={18} />
-              )}
+              {isMuted ? <FaVolumeMute size={18} /> : <FaVolumeUp size={18} />}
             </button>
-
-            {/* Selfie mode toggle */}
-            {!isRecording &&<button
-              onClick={onToggleSelfieMode}
-              className={`text-white ${isSelfieMode ? 'bg-[#FFC107]' : 'bg-gray-800'} p-3 rounded-full hover:bg-opacity-90 transition-colors sketch-button`}
-              aria-label={isSelfieMode ? "Exit Selfie Mode" : "Selfie Mode"}
-            >
-              <FaCamera size={18} />
-            </button>}
           </div>
 
-          <div>
+          <div className="flex items-center space-x-4">
+            {" "}
+            {/* Selfie mode toggle */}
+            {!isRecording && (
+              <button
+                onClick={onToggleSelfieMode}
+                className={`text-white ${
+                  isSelfieMode ? "bg-[#FFC107]" : "bg-gray-800"
+                } p-3 rounded-full hover:bg-opacity-90 transition-colors sketch-button`}
+                aria-label={isSelfieMode ? "Exit Selfie Mode" : "Selfie Mode"}
+              >
+                <FaCamera size={18} />
+              </button>
+            )}
             {/* Fullscreen button */}
             <button
               onClick={onFullscreenToggle}
